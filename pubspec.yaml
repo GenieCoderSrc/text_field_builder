@@ -1,7 +1,10 @@
 name: text_field_builder
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/GenieCoderSrc/text_field_builder
+repository: https://github.com/GenieCoderSrc/text_field_builder
+issue_tracker: https://github.com/GenieCoderSrc/text_field_builder/issues
+
 
 environment:
   sdk: ^3.7.2
@@ -10,6 +13,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
+  equatable: ^2.0.7
+  pin_code_fields: ^8.0.1
+  font_awesome_flutter: ^10.8.0
+  reusable_button: ^0.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -22,6 +34,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
+example:
+  path: example
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
