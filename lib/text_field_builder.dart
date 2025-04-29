@@ -1,6 +1,7 @@
 export 'app_search_field.dart';
 export 'app_text_field.dart';
 export 'app_text_form_field.dart';
+export 'text_field_builder.dart';
 export 'under_line_text_field.dart';
 export 'utils/input_focus.dart';
 export 'styles/text_field_border_radius.dart';

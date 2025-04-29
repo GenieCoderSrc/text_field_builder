@@ -17,7 +17,7 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  text_field_builder: ^1.0.0
+  text_field_builder: ^0.0.1
 ```
 
 Then run:
