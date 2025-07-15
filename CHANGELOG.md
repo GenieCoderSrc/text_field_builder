@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.0.3
+### Jul 15, 2025
+### ✨ Enhancements
+- update reusable_button packages
+
 ## 0.0.2
 ### Jul 15, 2025
 ### ✨ Enhancements
