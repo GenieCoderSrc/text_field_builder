@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'styles/text_field_style.dart';
+import 'styles/input_decoration_style.dart';
 
 class AppTextInput extends StatelessWidget {
   // strings
@@ -130,7 +130,7 @@ class AppTextInput extends StatelessWidget {
             keyboardType: keyboardType,
             textInputAction: textInputAction,
             maxLines: maxLines,
-            decoration: TextFieldStyle.inputDecoration(
+            decoration: InputDecorationStyle.inputDecoration(
               hintText: hintText,
               labelText: labelText,
               prefixIcon: Icon(prefixIcon),
@@ -140,7 +140,7 @@ class AppTextInput extends StatelessWidget {
               borderRadius: borderRadius,
               filled: filled,
               fillColor: fillColor,
-              isUnderLine: isUnderLine,
+              isUnderlined: isUnderLine,
               border: border,
             ),
             // decoration: InputDecoration(

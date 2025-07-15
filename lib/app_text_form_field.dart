@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'styles/text_field_style.dart';
+import 'styles/input_decoration_style.dart';
 import 'utils/input_focus.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -90,13 +90,17 @@ class AppTextFormField extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       textInputAction: textInputAction,
       onEditingComplete: onEditingComplete,
-      onFieldSubmitted: (_) =>
-          InputFocusHandler.changeFocusField(context, focusNode!, nextFocus),
+      onFieldSubmitted:
+          (_) => InputFocusHandler.changeFocusField(
+            context,
+            focusNode!,
+            nextFocus,
+          ),
       inputFormatters: <TextInputFormatter>[
         LengthLimitingTextInputFormatter(maxTexts ?? 100),
         FilteringTextInputFormatter.deny(RegExp("^[ ]*\$")),
       ],
-      decoration: TextFieldStyle.inputDecoration(
+      decoration: InputDecorationStyle.inputDecoration(
         hintText: hintText,
         labelText: labelText,
         errorMsg: errorMsg,
@@ -108,7 +112,7 @@ class AppTextFormField extends StatelessWidget {
         borderRadius: borderRadius,
         filled: filled,
         fillColor: fillColor,
-        isUnderLine: isUnderLine,
+        isUnderlined: isUnderLine,
         border: border,
       ),
     );

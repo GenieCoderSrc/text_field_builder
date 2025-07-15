@@ -12,4 +12,9 @@ class MobileNumberInfo {
   String get completeNumber {
     return '$countryCode$number';
   }
+
+  @override
+  String toString() {
+    return 'MobileNumberInfo(countryISOCode: $countryISOCode, countryCode: $countryCode, number: $number, completeNumber: $completeNumber)';
+  }
 }

@@ -1,6 +1,6 @@
 name: text_field_builder
 description: "A customizable Flutter package for building reusable and styled text fields, password inputs, and PIN code fields with validation and focus management."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/GenieCoderSrc/text_field_builder
 repository: https://github.com/GenieCoderSrc/text_field_builder
 issue_tracker: https://github.com/GenieCoderSrc/text_field_builder/issues
@@ -21,7 +21,6 @@ dependencies:
   pin_code_fields: ^8.0.1
   font_awesome_flutter: ^10.8.0
   reusable_button: ^0.0.1
-  app_style: ^0.0.1
 
 
 dev_dependencies:

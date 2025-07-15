@@ -5,7 +5,7 @@ export 'text_field_builder.dart';
 export 'under_line_text_field.dart';
 export 'utils/input_focus.dart';
 export 'styles/text_field_border_radius.dart';
-export 'styles/text_field_style.dart';
+export 'styles/input_decoration_style.dart';
 export 'phone_field/intl_mobile_field.dart';
 export 'phone_field/phone_field.dart';
 export 'phone_field/model/countries.dart';

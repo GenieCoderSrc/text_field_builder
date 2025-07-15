@@ -1,9 +1,23 @@
-## 0.0.1
-
-* TODO: Describe initial release.
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## 0.0.2
+### Jul 15, 2025
+### ✨ Enhancements
+- Improved `InputDecorationStyle.inputDecoration`:
+    - All parameters are now nullable with default fallbacks using `??`
+    - Added support for customizable:
+        - `TextStyle` parameters: `labelStyle`, `hintStyle`, `errorStyle`
+        - `borderColor`, `borderWidth`, and `borderRadius`
+        - `contentPadding`
+        - Support for both `OutlineInputBorder` and `UnderlineInputBorder` via `isUnderlined` flag
+- Enabled tappable `prefixIcon` and `suffixIcon` via `IconButton` support
+
+### 🧪 Usage Improvements
+- Improved flexibility and reusability for text fields across apps
+
+---
 
 ## 0.0.1
 - Initial release of `text_field_builder`
