@@ -20,7 +20,10 @@ dependencies:
   equatable: ^2.0.7
   pin_code_fields: ^8.0.1
   font_awesome_flutter: ^10.8.0
-  reusable_button: ^0.0.2
+
+
+  reusable_button:
+    path: ../reusable_button
 
 
 dev_dependencies:
