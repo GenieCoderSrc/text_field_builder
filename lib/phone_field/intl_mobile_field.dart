@@ -48,39 +48,42 @@ class IntlPhoneField extends StatefulWidget {
   /// Color of the drop down arrow
   final Color? dropDownArrowColor;
 
-  const IntlPhoneField(
-      {super.key, this.initialCountryCode,
-      this.obscureText = false,
-      this.textAlign = TextAlign.left,
-      this.onTap,
-      this.readOnly = false,
-      this.initialValue,
-      this.keyboardType = TextInputType.number,
-      this.autoValidate = true,
-      this.controller,
-      this.focusNode,
-      this.decoration,
-      this.style,
-      this.onSubmitted,
-      this.validator,
-      this.onChanged,
-      this.onSaved,
-      this.showDropdownIcon = true,
-      this.dropdownDecoration = const BoxDecoration(),
-      this.inputFormatters,
-      this.enabled = true,
-      this.keyboardAppearance = Brightness.light,
-      this.searchText = 'Search by Country Name',
-      this.countryCodeTextColor,
-      this.dropDownArrowColor});
+  const IntlPhoneField({
+    super.key,
+    this.initialCountryCode,
+    this.obscureText = false,
+    this.textAlign = TextAlign.left,
+    this.onTap,
+    this.readOnly = false,
+    this.initialValue,
+    this.keyboardType = TextInputType.number,
+    this.autoValidate = true,
+    this.controller,
+    this.focusNode,
+    this.decoration,
+    this.style,
+    this.onSubmitted,
+    this.validator,
+    this.onChanged,
+    this.onSaved,
+    this.showDropdownIcon = true,
+    this.dropdownDecoration = const BoxDecoration(),
+    this.inputFormatters,
+    this.enabled = true,
+    this.keyboardAppearance = Brightness.light,
+    this.searchText = 'Search by Country Name',
+    this.countryCodeTextColor,
+    this.dropDownArrowColor,
+  });
 
   @override
   _IntlPhoneFieldState createState() => _IntlPhoneFieldState();
 }
 
 class _IntlPhoneFieldState extends State<IntlPhoneField> {
-  Map<String, String> _selectedCountry =
-      countries.firstWhere((Map<String, String> item) => item['code'] == 'US');
+  Map<String, String> _selectedCountry = countries.firstWhere(
+    (Map<String, String> item) => item['code'] == 'US',
+  );
   List<Map<String, String>> filteredCountries = countries;
   FormFieldValidator<String>? validator;
 
@@ -91,13 +94,15 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
   void initState() {
     super.initState();
     if (widget.initialCountryCode != null) {
-      _selectedCountry = countries.firstWhere((Map<String, String> item) =>
-          item['code'] == widget.initialCountryCode);
+      _selectedCountry = countries.firstWhere(
+        (Map<String, String> item) => item['code'] == widget.initialCountryCode,
+      );
     }
-    validator = widget.autoValidate
-        ? ((String? value) =>
-            value?.length != 10 ? 'Invalid Mobile Number' : null)
-        : widget.validator;
+    validator =
+        widget.autoValidate
+            ? ((String? value) =>
+                value?.length != 10 ? 'Invalid Mobile Number' : null)
+            : widget.validator;
   }
 
   Future<void> _changeCountry() async {
@@ -105,78 +110,92 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
     await showDialog(
       context: context,
       useRootNavigator: false,
-      builder: (BuildContext context) => StatefulBuilder(
-        builder: (BuildContext ctx, Function setState) => Dialog(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(Icons.search),
-                    labelText: widget.searchText,
-                  ),
-                  onChanged: (String value) {
-                    setState(() {
-                      filteredCountries = countries
-                          .where((Map<String, String> country) =>
-                              country['name']!
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()))
-                          .toList();
-
-                      debugPrint('filteredCountries: $value');
-                    });
-                  },
-                ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: filteredCountries.length,
-                    itemBuilder: (BuildContext ctx, int index) => Column(
+      builder:
+          (BuildContext context) => StatefulBuilder(
+            builder:
+                (BuildContext ctx, Function setState) => Dialog(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
                       children: <Widget>[
-                        ListTile(
-                          leading: Text(
-                            filteredCountries[index]['flag']!,
-                            style: const TextStyle(fontSize: 30),
+                        TextField(
+                          decoration: InputDecoration(
+                            suffixIcon: const Icon(Icons.search),
+                            labelText: widget.searchText,
                           ),
-                          title: Text(
-                            filteredCountries[index]['name']!,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          trailing: Text(
-                            filteredCountries[index]['dial_code']!,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          onTap: () {
-                            _selectedCountry = filteredCountries[index];
-                            // call onChanged method here for update country code & phone number
-                            if (widget.onChanged != null) {
-                              widget.onChanged!(
-                                MobileNumberInfo(
-                                  countryISOCode: _selectedCountry['code'],
-                                  countryCode: _selectedCountry['dial_code'],
-                                  number: _mobileNumber,
-                                ),
-                              );
-                            }
-                            Navigator.of(context).pop();
-                            if (widget.focusNode?.requestFocus != null) {
-                              widget.focusNode!.requestFocus();
-                            }
+                          onChanged: (String value) {
+                            setState(() {
+                              filteredCountries =
+                                  countries
+                                      .where(
+                                        (Map<String, String> country) =>
+                                            country['name']!
+                                                .toLowerCase()
+                                                .contains(value.toLowerCase()),
+                                      )
+                                      .toList();
+
+                              debugPrint('filteredCountries: $value');
+                            });
                           },
                         ),
-                        const Divider(thickness: 1),
+                        const SizedBox(height: 20),
+                        Expanded(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: filteredCountries.length,
+                            itemBuilder:
+                                (BuildContext ctx, int index) => Column(
+                                  children: <Widget>[
+                                    ListTile(
+                                      leading: Text(
+                                        filteredCountries[index]['flag']!,
+                                        style: const TextStyle(fontSize: 30),
+                                      ),
+                                      title: Text(
+                                        filteredCountries[index]['name']!,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      trailing: Text(
+                                        filteredCountries[index]['dial_code']!,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        _selectedCountry =
+                                            filteredCountries[index];
+                                        // call onChanged method here for update country code & phone number
+                                        if (widget.onChanged != null) {
+                                          widget.onChanged!(
+                                            MobileNumberInfo(
+                                              countryISOCode:
+                                                  _selectedCountry['code'],
+                                              countryCode:
+                                                  _selectedCountry['dial_code'],
+                                              number: _mobileNumber,
+                                            ),
+                                          );
+                                        }
+                                        Navigator.of(context).pop();
+                                        if (widget.focusNode?.requestFocus !=
+                                            null) {
+                                          widget.focusNode!.requestFocus();
+                                        }
+                                      },
+                                    ),
+                                    const Divider(thickness: 1),
+                                  ],
+                                ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ],
-            ),
           ),
-        ),
-      ),
     );
     setState(() {});
   }
@@ -253,11 +272,8 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (widget.showDropdownIcon) ...<Widget>[
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: widget.dropDownArrowColor,
-                ),
-                const SizedBox(width: 4)
+                Icon(Icons.arrow_drop_down, color: widget.dropDownArrowColor),
+                const SizedBox(width: 4),
               ],
               Text(
                 _selectedCountry['flag']!,
@@ -268,8 +284,9 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                 child: Text(
                   _selectedCountry['dial_code']!,
                   style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: widget.countryCodeTextColor),
+                    fontWeight: FontWeight.w700,
+                    color: widget.countryCodeTextColor,
+                  ),
                 ),
               ),
               const SizedBox(width: 8),

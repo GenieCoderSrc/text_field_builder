@@ -19,7 +19,8 @@ class InputFocusHandler {
 
   ///On clear text field
   static Future<void> clearTextField(
-      TextEditingController textController) async {
+    TextEditingController textController,
+  ) async {
     await Future<int>.delayed(const Duration(milliseconds: 2));
     textController.text = '';
   }

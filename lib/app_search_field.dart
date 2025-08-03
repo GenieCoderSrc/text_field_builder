@@ -17,14 +17,13 @@ class AppSearchField extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(
-              fieldModel?.radius ?? 50), // Adjust the radius as needed
+            fieldModel?.radius ?? 50,
+          ), // Adjust the radius as needed
         ),
       ),
       child: AppTextInput(
         onTapSuffixIcon: () async {
-          await Future<void>.delayed(
-            const Duration(milliseconds: 10),
-          );
+          await Future<void>.delayed(const Duration(milliseconds: 10));
           if (fieldModel?.onTapSuffixIcon != null) {
             fieldModel?.onTapSuffixIcon?.call();
           }

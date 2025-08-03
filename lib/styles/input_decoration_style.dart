@@ -40,11 +40,17 @@ class InputDecorationStyle {
 
     final OutlineInputBorder outlineBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(effectiveRadius),
-      borderSide: BorderSide(color: effectiveBorderColor, width: effectiveBorderWidth),
+      borderSide: BorderSide(
+        color: effectiveBorderColor,
+        width: effectiveBorderWidth,
+      ),
     );
 
     final UnderlineInputBorder underlineBorder = UnderlineInputBorder(
-      borderSide: BorderSide(color: effectiveBorderColor, width: effectiveBorderWidth),
+      borderSide: BorderSide(
+        color: effectiveBorderColor,
+        width: effectiveBorderWidth,
+      ),
     );
 
     return InputDecoration(
@@ -56,20 +62,19 @@ class InputDecorationStyle {
       // Text Styles
       labelStyle: labelStyle ?? const TextStyle(color: Colors.blueGrey),
       hintStyle: hintStyle ?? const TextStyle(color: Colors.grey),
-      errorStyle: errorStyle ??
-          const TextStyle(
-            fontSize: 12.0,
-            color: Colors.redAccent,
-            height: 1.3,
-          ),
+      errorStyle:
+          errorStyle ??
+          const TextStyle(fontSize: 12.0, color: Colors.redAccent, height: 1.3),
 
       // Icons
-      prefixIcon: prefixIcon != null && onTapPrefixIcon != null
-          ? IconButton(icon: prefixIcon, onPressed: onTapPrefixIcon)
-          : prefixIcon,
-      suffixIcon: suffixIcon != null
-          ? IconButton(icon: suffixIcon, onPressed: onTapSuffixIcon)
-          : null,
+      prefixIcon:
+          prefixIcon != null && onTapPrefixIcon != null
+              ? IconButton(icon: prefixIcon, onPressed: onTapPrefixIcon)
+              : prefixIcon,
+      suffixIcon:
+          suffixIcon != null
+              ? IconButton(icon: suffixIcon, onPressed: onTapSuffixIcon)
+              : null,
 
       // Fill
       filled: filled ?? true,
@@ -85,7 +90,6 @@ class InputDecorationStyle {
     );
   }
 }
-
 
 // class InputDecorationStyle {
 //   static InputDecoration inputDecoration({

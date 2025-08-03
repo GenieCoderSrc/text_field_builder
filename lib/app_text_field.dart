@@ -97,10 +97,9 @@ class AppTextInput extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Text(
         errorMsg!,
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall
-            ?.copyWith(color: Theme.of(context).colorScheme.error),
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          color: Theme.of(context).colorScheme.error,
+        ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -154,7 +153,7 @@ class AppTextInput extends StatelessWidget {
             //   border: InputBorder.none,
             // ),
           ),
-          _buildErrorLabel(context)
+          _buildErrorLabel(context),
         ],
       ),
     );

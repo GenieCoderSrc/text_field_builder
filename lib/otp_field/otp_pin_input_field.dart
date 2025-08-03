@@ -23,7 +23,7 @@ class PinCodeField extends StatelessWidget {
           offset: const Offset(0, 1),
           color: Colors.blue.shade100,
           blurRadius: 5,
-        )
+        ),
       ],
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.box,

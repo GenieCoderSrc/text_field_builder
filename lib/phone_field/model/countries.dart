@@ -1474,5 +1474,5 @@ const List<Map<String, String>> countries = <Map<String, String>>[
     "flag": "🇿🇼",
     "code": "ZW",
     "dial_code": "+263",
-  }
+  },
 ];
