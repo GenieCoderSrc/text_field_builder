@@ -90,12 +90,8 @@ class AppTextFormField extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       textInputAction: textInputAction,
       onEditingComplete: onEditingComplete,
-      onFieldSubmitted:
-          (_) => InputFocusHandler.changeFocusField(
-            context,
-            focusNode!,
-            nextFocus,
-          ),
+      onFieldSubmitted: (_) =>
+          InputFocusHandler.changeFocusField(context, focusNode!, nextFocus),
       inputFormatters: <TextInputFormatter>[
         LengthLimitingTextInputFormatter(maxTexts ?? 100),
         FilteringTextInputFormatter.deny(RegExp("^[ ]*\$")),

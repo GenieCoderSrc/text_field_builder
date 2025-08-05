@@ -98,11 +98,10 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         (Map<String, String> item) => item['code'] == widget.initialCountryCode,
       );
     }
-    validator =
-        widget.autoValidate
-            ? ((String? value) =>
-                value?.length != 10 ? 'Invalid Mobile Number' : null)
-            : widget.validator;
+    validator = widget.autoValidate
+        ? ((String? value) =>
+              value?.length != 10 ? 'Invalid Mobile Number' : null)
+        : widget.validator;
   }
 
   Future<void> _changeCountry() async {
@@ -110,92 +109,79 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
     await showDialog(
       context: context,
       useRootNavigator: false,
-      builder:
-          (BuildContext context) => StatefulBuilder(
-            builder:
-                (BuildContext ctx, Function setState) => Dialog(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        TextField(
-                          decoration: InputDecoration(
-                            suffixIcon: const Icon(Icons.search),
-                            labelText: widget.searchText,
-                          ),
-                          onChanged: (String value) {
-                            setState(() {
-                              filteredCountries =
-                                  countries
-                                      .where(
-                                        (Map<String, String> country) =>
-                                            country['name']!
-                                                .toLowerCase()
-                                                .contains(value.toLowerCase()),
-                                      )
-                                      .toList();
+      builder: (BuildContext context) => StatefulBuilder(
+        builder: (BuildContext ctx, Function setState) => Dialog(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.search),
+                    labelText: widget.searchText,
+                  ),
+                  onChanged: (String value) {
+                    setState(() {
+                      filteredCountries = countries
+                          .where(
+                            (Map<String, String> country) => country['name']!
+                                .toLowerCase()
+                                .contains(value.toLowerCase()),
+                          )
+                          .toList();
 
-                              debugPrint('filteredCountries: $value');
-                            });
+                      debugPrint('filteredCountries: $value');
+                    });
+                  },
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: filteredCountries.length,
+                    itemBuilder: (BuildContext ctx, int index) => Column(
+                      children: <Widget>[
+                        ListTile(
+                          leading: Text(
+                            filteredCountries[index]['flag']!,
+                            style: const TextStyle(fontSize: 30),
+                          ),
+                          title: Text(
+                            filteredCountries[index]['name']!,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          trailing: Text(
+                            filteredCountries[index]['dial_code']!,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          onTap: () {
+                            _selectedCountry = filteredCountries[index];
+                            // call onChanged method here for update country code & phone number
+                            if (widget.onChanged != null) {
+                              widget.onChanged!(
+                                MobileNumberInfo(
+                                  countryISOCode: _selectedCountry['code'],
+                                  countryCode: _selectedCountry['dial_code'],
+                                  number: _mobileNumber,
+                                ),
+                              );
+                            }
+                            Navigator.of(context).pop();
+                            if (widget.focusNode?.requestFocus != null) {
+                              widget.focusNode!.requestFocus();
+                            }
                           },
                         ),
-                        const SizedBox(height: 20),
-                        Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: filteredCountries.length,
-                            itemBuilder:
-                                (BuildContext ctx, int index) => Column(
-                                  children: <Widget>[
-                                    ListTile(
-                                      leading: Text(
-                                        filteredCountries[index]['flag']!,
-                                        style: const TextStyle(fontSize: 30),
-                                      ),
-                                      title: Text(
-                                        filteredCountries[index]['name']!,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                      trailing: Text(
-                                        filteredCountries[index]['dial_code']!,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        _selectedCountry =
-                                            filteredCountries[index];
-                                        // call onChanged method here for update country code & phone number
-                                        if (widget.onChanged != null) {
-                                          widget.onChanged!(
-                                            MobileNumberInfo(
-                                              countryISOCode:
-                                                  _selectedCountry['code'],
-                                              countryCode:
-                                                  _selectedCountry['dial_code'],
-                                              number: _mobileNumber,
-                                            ),
-                                          );
-                                        }
-                                        Navigator.of(context).pop();
-                                        if (widget.focusNode?.requestFocus !=
-                                            null) {
-                                          widget.focusNode!.requestFocus();
-                                        }
-                                      },
-                                    ),
-                                    const Divider(thickness: 1),
-                                  ],
-                                ),
-                          ),
-                        ),
+                        const Divider(thickness: 1),
                       ],
                     ),
                   ),
                 ),
+              ],
+            ),
           ),
+        ),
+      ),
     );
     setState(() {});
   }

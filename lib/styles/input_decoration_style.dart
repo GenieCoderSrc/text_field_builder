@@ -67,14 +67,12 @@ class InputDecorationStyle {
           const TextStyle(fontSize: 12.0, color: Colors.redAccent, height: 1.3),
 
       // Icons
-      prefixIcon:
-          prefixIcon != null && onTapPrefixIcon != null
-              ? IconButton(icon: prefixIcon, onPressed: onTapPrefixIcon)
-              : prefixIcon,
-      suffixIcon:
-          suffixIcon != null
-              ? IconButton(icon: suffixIcon, onPressed: onTapSuffixIcon)
-              : null,
+      prefixIcon: prefixIcon != null && onTapPrefixIcon != null
+          ? IconButton(icon: prefixIcon, onPressed: onTapPrefixIcon)
+          : prefixIcon,
+      suffixIcon: suffixIcon != null
+          ? IconButton(icon: suffixIcon, onPressed: onTapSuffixIcon)
+          : null,
 
       // Fill
       filled: filled ?? true,

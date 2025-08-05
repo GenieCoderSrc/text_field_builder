@@ -44,8 +44,9 @@ class _NormalPasswordFieldStreamBuilderState
       builder: (BuildContext context, AsyncSnapshot<String?> snap) {
         return AppTextFormField(
           prefixIcon: Icons.lock,
-          suffixIcon:
-              _obscurePassword ? Icons.visibility_off : Icons.visibility,
+          suffixIcon: _obscurePassword
+              ? Icons.visibility_off
+              : Icons.visibility,
           onTapSuffixIcon: _togglePasswordVisibility,
           obscureText: _obscurePassword,
           textController: widget.textController,

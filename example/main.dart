@@ -60,12 +60,11 @@ class _TextFieldDemoPageState extends State<TextFieldDemoPage> {
               textController: _usernameController,
               focusNode: _usernameFocus,
               nextFocus: _emailFocus,
-              onSubmitted:
-                  (value) => InputFocusHandler.changeFocusField(
-                    context,
-                    _usernameFocus,
-                    _emailFocus,
-                  ),
+              onSubmitted: (value) => InputFocusHandler.changeFocusField(
+                context,
+                _usernameFocus,
+                _emailFocus,
+              ),
             ),
             const SizedBox(height: 20),
             AppTextFormField(
@@ -75,18 +74,15 @@ class _TextFieldDemoPageState extends State<TextFieldDemoPage> {
               textController: _emailController,
               focusNode: _emailFocus,
               nextFocus: _passwordFocus,
-              validator:
-                  (value) =>
-                      (value == null || !value.contains('@'))
-                          ? 'Invalid email'
-                          : null,
+              validator: (value) => (value == null || !value.contains('@'))
+                  ? 'Invalid email'
+                  : null,
               onChanged: (value) {},
-              onFieldSubmitted:
-                  () => InputFocusHandler.changeFocusField(
-                    context,
-                    _emailFocus,
-                    _passwordFocus,
-                  ),
+              onFieldSubmitted: () => InputFocusHandler.changeFocusField(
+                context,
+                _emailFocus,
+                _passwordFocus,
+              ),
             ),
             const SizedBox(height: 20),
             AppPhoneField(
