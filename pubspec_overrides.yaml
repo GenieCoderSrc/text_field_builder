@@ -1,6 +1,0 @@
-# melos_managed_dependency_overrides: loading_builder,reusable_button
-dependency_overrides:
-  loading_builder:
-    path: ../loading_builder
-  reusable_button:
-    path: ../reusable_button

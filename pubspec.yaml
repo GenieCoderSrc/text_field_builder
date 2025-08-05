@@ -14,8 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  reusable_button:
-    path: ../reusable_button
+  reusable_button: ^0.0.2
 
 
   bloc: ^9.0.0
