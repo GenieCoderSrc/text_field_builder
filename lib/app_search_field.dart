@@ -22,11 +22,8 @@ class AppSearchField extends StatelessWidget {
         ),
       ),
       child: AppTextInput(
-        onTapSuffixIcon: () async {
-          await Future<void>.delayed(const Duration(milliseconds: 10));
-          if (fieldModel?.onTapSuffixIcon != null) {
-            fieldModel?.onTapSuffixIcon?.call();
-          }
+        onTapSuffixIcon: () {
+          fieldModel?.onTapSuffixIcon?.call();
           fieldModel?.controller?.clear();
           InputFocusHandler.hiddenKeyboard(context);
         },

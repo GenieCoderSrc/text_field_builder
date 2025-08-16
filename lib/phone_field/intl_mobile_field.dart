@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'model/countries.dart';
 import 'model/mobile_number_info.dart';
 
+/// Public typedef to safely expose the private state if needed
+typedef IntlPhoneFieldState = _IntlPhoneFieldState;
+
 class IntlPhoneField extends StatefulWidget {
   final bool obscureText;
   final TextAlign textAlign;
@@ -22,19 +25,15 @@ class IntlPhoneField extends StatefulWidget {
   final void Function(String)? onSubmitted;
 
   final bool enabled;
-
   final Brightness keyboardAppearance;
-
   final String? initialValue;
 
   /// 2 Letter ISO Code
   final String? initialCountryCode;
 
   final InputDecoration? decoration;
-
   final TextStyle? style;
   final bool showDropdownIcon;
-
   final BoxDecoration dropdownDecoration;
 
   final List<TextInputFormatter>? inputFormatters;
@@ -81,36 +80,32 @@ class IntlPhoneField extends StatefulWidget {
 }
 
 class _IntlPhoneFieldState extends State<IntlPhoneField> {
-  Map<String, String> _selectedCountry = countries.firstWhere(
-    (Map<String, String> item) => item['code'] == 'US',
-  );
-  List<Map<String, String>> filteredCountries = countries;
+  late Map<String, String> _selectedCountry;
+  late List<Map<String, String>> filteredCountries;
   FormFieldValidator<String>? validator;
-
-  // declare mobile obj
   String? _mobileNumber = '';
 
   @override
   void initState() {
     super.initState();
-    if (widget.initialCountryCode != null) {
-      _selectedCountry = countries.firstWhere(
-        (Map<String, String> item) => item['code'] == widget.initialCountryCode,
-      );
-    }
+    _selectedCountry = countries.firstWhere(
+          (item) => item['code'] == (widget.initialCountryCode ?? 'US'),
+    );
+    filteredCountries = countries;
+
     validator = widget.autoValidate
-        ? ((String? value) =>
-              value?.length != 10 ? 'Invalid Mobile Number' : null)
+        ? ((value) => value?.length != 10 ? 'Invalid Mobile Number' : null)
         : widget.validator;
   }
 
   Future<void> _changeCountry() async {
     filteredCountries = countries;
+
     await showDialog(
       context: context,
       useRootNavigator: false,
-      builder: (BuildContext context) => StatefulBuilder(
-        builder: (BuildContext ctx, Function setState) => Dialog(
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setState) => Dialog(
           child: Container(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -120,17 +115,15 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                     suffixIcon: const Icon(Icons.search),
                     labelText: widget.searchText,
                   ),
-                  onChanged: (String value) {
+                  onChanged: (value) {
                     setState(() {
                       filteredCountries = countries
                           .where(
-                            (Map<String, String> country) => country['name']!
-                                .toLowerCase()
-                                .contains(value.toLowerCase()),
-                          )
+                            (country) => country['name']!
+                            .toLowerCase()
+                            .contains(value.toLowerCase()),
+                      )
                           .toList();
-
-                      debugPrint('filteredCountries: $value');
                     });
                   },
                 ),
@@ -139,7 +132,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: filteredCountries.length,
-                    itemBuilder: (BuildContext ctx, int index) => Column(
+                    itemBuilder: (ctx, index) => Column(
                       children: <Widget>[
                         ListTile(
                           leading: Text(
@@ -156,7 +149,6 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                           ),
                           onTap: () {
                             _selectedCountry = filteredCountries[index];
-                            // call onChanged method here for update country code & phone number
                             if (widget.onChanged != null) {
                               widget.onChanged!(
                                 MobileNumberInfo(
@@ -167,9 +159,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                               );
                             }
                             Navigator.of(context).pop();
-                            if (widget.focusNode?.requestFocus != null) {
-                              widget.focusNode!.requestFocus();
-                            }
+                            widget.focusNode?.requestFocus();
                           },
                         ),
                         const Divider(thickness: 1),
@@ -199,20 +189,15 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             obscureText: widget.obscureText,
             textAlign: widget.textAlign,
             textInputAction: TextInputAction.next,
-            onTap: () {
-              if (widget.onTap != null) widget.onTap!();
-            },
+            onTap: widget.onTap,
             controller: widget.controller,
             focusNode: widget.focusNode,
-            onFieldSubmitted: (String s) {
-              if (widget.onSubmitted != null) widget.onSubmitted!(s);
-            },
+            onFieldSubmitted: widget.onSubmitted,
             decoration: widget.decoration,
             style: widget.style,
-            onSaved: (String? value) {
-              // set mobile number to mobile obj
+            onSaved: (value) {
               _mobileNumber = value;
-              if (widget.onSaved != null && value != null) {
+              if (value != null && widget.onSaved != null) {
                 widget.onSaved!(
                   MobileNumberInfo(
                     countryISOCode: _selectedCountry['code'],
@@ -222,8 +207,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                 );
               }
             },
-            onChanged: (String value) {
-              // set mobile number to mobile obj
+            onChanged: (value) {
               _mobileNumber = value;
               if (widget.onChanged != null) {
                 widget.onChanged!(
@@ -257,7 +241,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (widget.showDropdownIcon) ...<Widget>[
+              if (widget.showDropdownIcon) ...[
                 Icon(Icons.arrow_drop_down, color: widget.dropDownArrowColor),
                 const SizedBox(width: 4),
               ],
