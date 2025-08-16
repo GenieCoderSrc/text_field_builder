@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Updated
 
+- Updated `IntlPhoneField` with IntlPhoneFieldState typedef
 - Updated `reusable_button` package
 
 ## 0.0.3

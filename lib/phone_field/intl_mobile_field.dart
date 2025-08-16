@@ -89,7 +89,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
   void initState() {
     super.initState();
     _selectedCountry = countries.firstWhere(
-          (item) => item['code'] == (widget.initialCountryCode ?? 'US'),
+      (item) => item['code'] == (widget.initialCountryCode ?? 'US'),
     );
     filteredCountries = countries;
 
@@ -120,9 +120,9 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                       filteredCountries = countries
                           .where(
                             (country) => country['name']!
-                            .toLowerCase()
-                            .contains(value.toLowerCase()),
-                      )
+                                .toLowerCase()
+                                .contains(value.toLowerCase()),
+                          )
                           .toList();
                     });
                   },
