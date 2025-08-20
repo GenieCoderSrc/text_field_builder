@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.0.5
+
+### Aug 22, 2025
+
+### ✨ Updated
+
+- Updated font_awesome_flutter version as font_awesome_flutter: ^10.10.0
+- updated reusable_button to 0.0.5
+- Updated Dart sdk to 3.9.0
+- Removed `flutter_lints` Dependency
+
 ## 0.0.4
 
 ### Aug 16, 2025
